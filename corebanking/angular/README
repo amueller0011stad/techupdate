@@ -31,3 +31,6 @@ To package the files for deployment in a JEE Servlet container, use:
 To run with Node's development server, use:
 
   npm start
+
+Due to Same Origin Policy, that variant is not really useful at the moment
+though as communication with the JAX-RS endpoint is impossible.
