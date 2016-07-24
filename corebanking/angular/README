@@ -1,0 +1,28 @@
+This directory contains the Angular front-end application for the Core
+Banking project. It started off as an angular-seed copy and it is expected 
+that the node.js based test & development machinery continues to work.
+
+While it can be packaged with Maven, this is really independent of Angular.
+It can perfectly well be deployed using other tools, as it's only
+static content from the web server's point of view.
+
+The original LICENSE and README.md files are available as LICENSE.seed
+README.seed.md, respectively.
+
+== BOOTSTRAPPING ==
+
+You need npm.
+
+Install Angular prerequisites by executing:
+
+  npm install
+
+This only needs to be done once (except in cases when Angular needs to
+be updated).
+
+== PACKAGING ==
+
+To package the files for deployment in a JEE Servlet container, use:
+
+  mvn package
+
