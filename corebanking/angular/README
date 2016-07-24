@@ -26,3 +26,8 @@ To package the files for deployment in a JEE Servlet container, use:
 
   mvn package
 
+== RUNNING LOCALLY ==
+
+To run with Node's development server, use:
+
+  npm start
