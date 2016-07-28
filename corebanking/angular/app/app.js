@@ -1,8 +1,9 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var app = angular.module('myApp', [
   'ngRoute',
+  'myApp.corebanking-client',
   'myApp.view1',
   'myApp.view2',
   'myApp.version'
@@ -12,3 +13,12 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]);
+
+app.run(function($rootScope,BankInfo)
+{
+  BankInfo.query(function(response)
+  {
+    $rootScope.bankinfo = response;
+  });
+});
+
