@@ -7,6 +7,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import com.soprasteria.de.b1.pb.techupdate.resources.BankResource;
+import com.soprasteria.de.b1.pb.techupdate.resources.LogonResource;
 
 /**
  */
@@ -19,7 +20,7 @@ extends Application
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> classes = new HashSet<Class<?>>();
         classes.add(BankResource.class);
-
+        classes.add(LogonResource.class);
         return classes;
     }
 
