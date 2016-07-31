@@ -9,4 +9,24 @@
         <module>service</module>
         <module>angular</module>
     </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <server>Tomcat-Techupdate</server>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+<!--
+Local Variables:
+nxml-child-indent: 4
+indent-tabs-mode: nil
+End:
+-->
+
 </project>
