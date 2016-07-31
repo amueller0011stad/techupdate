@@ -26,7 +26,28 @@ To package the files for deployment in a JEE Servlet container, use:
 
   mvn package
 
-== RUNNING LOCALLY ==
+== DEPLOYING TO TOMCAT ==
+
+The pom.xml file contains a tomcat7-maven-plugin (also works with
+later versions) configuration that uses the server name
+"Tomcat-Techupdate" with the default URL. To use it:
+
+(1) Create a suitable user in tomcat-users.xml with the roles
+    manager-html,manager-script.
+(2) Create a configuration in settings.xml that assigns this user
+    to the server name:
+
+    [...]
+    <servers>
+        <server>
+            <id>Tomcat-Techupdate</id>
+            <username>USERNAME_CREATED_IN_STEP_1</username>
+            <password>PASSWORD_CHOSEN_IN_STEP_1</password>
+        </server>
+    </servers>
+    [...]
+
+== RUNNING LOCALLY (NODE) ==
 
 To run with Node's development server, use:
 
