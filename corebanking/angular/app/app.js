@@ -4,6 +4,8 @@
 var app = angular.module('myApp', [
   'ngRoute',
   'myApp.corebanking-client',
+  'myApp.credentials',
+  'myApp.logon',
   'myApp.view1',
   'myApp.view2',
   'myApp.version'

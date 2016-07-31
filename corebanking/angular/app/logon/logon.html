@@ -1,0 +1,20 @@
+<form>
+
+  <p>Currently logged on as {{username}}.
+
+  <table>
+    <tr>
+      <td>User:</td>
+      <td><input type="text" ng-model="usernameField"></td>
+    </tr>
+    <tr>
+      <td>Password:</td>
+      <td><input type="password" ng-model="passwordField"></td>
+    </tr>
+  </table>
+
+  <p>
+    <button ng-click="sendCredentials()">Submit</button>
+  </p>
+
+</form>
