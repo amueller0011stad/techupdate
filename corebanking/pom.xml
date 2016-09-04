@@ -6,7 +6,7 @@
     <packaging>pom</packaging>
     <name>Core Banking aggregated (PHONY)</name>
     <modules>
-        <module>service</module>
+        <module>login-service</module>
         <module>angular</module>
     </modules>
     <build>

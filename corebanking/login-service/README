@@ -1,6 +1,5 @@
-This directory contains an example JAX-RS endpoint.
-Note that at the moment, we don't plan using JAX-RS but Spring Boot,
-so this project is not going to be part of the deployed application.
+This directory is intended to contain the service component for
+the Core Banking project (i. e. JAX-RS endpoints etc.).
 
 == PACKAGING ==
 
