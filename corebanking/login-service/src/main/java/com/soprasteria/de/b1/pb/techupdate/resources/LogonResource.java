@@ -1,26 +1,23 @@
 package com.soprasteria.de.b1.pb.techupdate.resources;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.de.b1.pb.techupdate.AuthToken;
 
 /**
  */
-@Path("/logon")
+@RestController
 public class LogonResource
 {
 
-    @POST
-    @Path("{username}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @RequestMapping(path="/logon/{username}",method=RequestMethod.POST)
     public AuthToken getToken(
-    		@PathParam("username") String username,
-    		@QueryParam("password") String password)
+    		@PathVariable("username") String username,
+    		@RequestParam("password") String password)
     {
     	AuthToken token = new AuthToken();
     	/* Check password here XXX
