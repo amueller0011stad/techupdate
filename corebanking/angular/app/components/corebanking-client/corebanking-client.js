@@ -9,7 +9,7 @@ angular.module('myApp.corebanking-client', ['ngResource'])
       function($resource)
       {
         return $resource(
-          '/corebanking-service/resources/bank/info',{}, 
+          '/corebanking-login-service/info',{}, 
           {
             query: {method:'GET'}
           });
@@ -23,7 +23,7 @@ angular.module('myApp.corebanking-client', ['ngResource'])
       function($resource)
       {
         return $resource(
-          '/corebanking-service/resources/logon/:username',
+          '/corebanking-login-service/logon/:username',
           {
             password:'@password'
           },
