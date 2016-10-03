@@ -1,0 +1,5 @@
+<Context>
+  <ResourceLink name="jdbc/corebankingDataSource"
+                global="jdbc/corebankingDataSource"
+                type="javax.sql.DataSource"/>
+</Context>
