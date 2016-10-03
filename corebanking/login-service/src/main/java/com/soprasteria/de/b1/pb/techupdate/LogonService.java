@@ -29,13 +29,4 @@ extends SpringBootServletInitializer
     {
         return new PersistenceSupport();
     }
-    
-//    @Bean
-//    public LocalEntityManagerFactoryBean getEntityManagerFactoryBean()
-//    {
-//        LocalEntityManagerFactoryBean bean = new LocalEntityManagerFactoryBean();
-//        bean.setPersistenceUnitName("corebankingLoginService");
-//        return bean;
-//    }
-
 }
