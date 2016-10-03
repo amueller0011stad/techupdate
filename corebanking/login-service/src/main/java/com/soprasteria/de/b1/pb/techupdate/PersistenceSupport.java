@@ -1,6 +1,5 @@
 package com.soprasteria.de.b1.pb.techupdate;
 
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -19,13 +18,6 @@ implements DisposableBean
     PersistenceSupport()
     {
         log.info("Creating EntityManagerFactory");
-        createEntityManagerFactory();
-    }
-    
-    private void createEntityManagerFactory()
-    {
-        //final Properties config=new Properties();
-        
         emf=Persistence.createEntityManagerFactory("corebankingLoginService");
     }
     
