@@ -27,3 +27,8 @@ later versions) configuration that uses the server name
         </server>
     </servers>
     [...]
+(3) Deploy with "mvn tomcat7:deploy" or "mvn tomcat7:redeploy". If
+    your Tomcat is at a different URL, use
+    "mvn -Dtomcat.url=http://host:port/manager/text tomcat7:deploy" etc.
+    You can also create a default profile in settings.xml that sets
+    that property.
