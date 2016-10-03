@@ -9,42 +9,12 @@
     <!-- POM for the login-service, using Spring Boot -->
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.0.RELEASE</version>
+        <groupId>com.soprasteria.de.b1.pb.techupdate</groupId>
+        <artifactId>corebanking-service-parent</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../service-parent/pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <server>Tomcat-Techupdate</server>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-    </repositories>
 <!--
 Local Variables:
 nxml-child-indent: 4
