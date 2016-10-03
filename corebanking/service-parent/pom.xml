@@ -28,6 +28,7 @@
                 <version>2.2</version>
                 <configuration>
                     <server>Tomcat-Techupdate</server>
+                    <url>${tomcat.url}</url>
                 </configuration>
             </plugin>
         </plugins>
