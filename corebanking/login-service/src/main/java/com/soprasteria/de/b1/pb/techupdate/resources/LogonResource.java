@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.de.b1.pb.techupdate.AuthToken;
+import com.soprasteria.de.b1.pb.techupdate.PersistenceSupport;
 
 /**
  */
@@ -17,12 +18,14 @@ public class LogonResource
 {
     private static final Logger log = Logger.getLogger("corebanking-login-service");
     
-    public LogonResource()
+    private PersistenceSupport persistence;
+    
+    public LogonResource(PersistenceSupport persistence)
     {
         log.info("Instantiating logon resource");
     }
 
-    @RequestMapping(path="/logon/{username}",method=RequestMethod.POST)
+    @RequestMapping(path="/logon/{username}")
     public AuthToken getToken(
     		@PathVariable("username") String username,
     		@RequestParam("password") String password)

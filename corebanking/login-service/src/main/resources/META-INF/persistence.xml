@@ -13,9 +13,11 @@
       <validation-mode>NONE</validation-mode>
       <properties>
          <property name="hibernate.dialect" 
-         	       value="org.hibernate.dialect.OracleDialect"/>
+         	       value="org.hibernate.dialect.Oracle10gDialect"/>
          <property name="hibernate.hbm2ddl.auto" 
-                   value="create,update"/>
+                   value="create"/>
+         <property name="hibernate.show_sql" 
+                   value="true"/>
       </properties>
    </persistence-unit>
 </persistence>
