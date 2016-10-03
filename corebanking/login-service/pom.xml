@@ -6,7 +6,7 @@
     <packaging>war</packaging>
     <name>Core Banking Login Service</name>
 
-    <!-- POM for the login-service, using Spring Boot -->
+    <!-- POM for the login service, using Spring Boot -->
 
     <parent>
         <groupId>com.soprasteria.de.b1.pb.techupdate</groupId>
@@ -14,7 +14,16 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../service-parent/pom.xml</relativePath>
     </parent>
-
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.2.2.Final</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+  
 <!--
 Local Variables:
 nxml-child-indent: 4

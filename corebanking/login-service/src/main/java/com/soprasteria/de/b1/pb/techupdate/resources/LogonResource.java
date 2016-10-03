@@ -1,5 +1,7 @@
 package com.soprasteria.de.b1.pb.techupdate.resources;
 
+import java.util.logging.Logger;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,12 @@ import com.soprasteria.de.b1.pb.techupdate.AuthToken;
 @RestController
 public class LogonResource
 {
+    private static final Logger log = Logger.getLogger("corebanking-login-service");
+    
+    public LogonResource()
+    {
+        log.info("Instantiating logon resource");
+    }
 
     @RequestMapping(path="/logon/{username}",method=RequestMethod.POST)
     public AuthToken getToken(
