@@ -5,9 +5,16 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(
+            name="Login.byUsername",
+            query="select l from Login l where username=:username")
+})
 @Table(name = "LOGIN")
 public class Login
 {
@@ -17,6 +24,9 @@ public class Login
 
     @Column(name = "SALT")
     private String salt;
+    
+    @Column(name = "HASH")
+    private String hash;
 
     @Column(name = "FAILED_LOGIN_ATTEMPTS")
     private int failedLoginAttempts;
@@ -45,6 +55,16 @@ public class Login
     public void setSalt(String salt)
     {
         this.salt = salt;
+    }
+
+    public String getHash()
+    {
+        return hash;
+    }
+
+    public void setHash(String hash)
+    {
+        this.hash = hash;
     }
 
     public int getFailedLoginAttempts()
@@ -77,4 +97,8 @@ public class Login
         this.locked = locked;
     }
 
+    public boolean checkPassword(String pw)
+    {
+        return LoginUtil.checkPw(pw,getSalt(),getHash());
+    }
 }
