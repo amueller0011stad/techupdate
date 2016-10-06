@@ -6,7 +6,7 @@
              version="2.0">
    <persistence-unit name="corebankingLoginService" transaction-type="RESOURCE_LOCAL">
       <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-      <non-jta-data-source>jdbc/corebankingDataSource</non-jta-data-source>
+      <non-jta-data-source>java:comp/env/jdbc/corebankingDataSource</non-jta-data-source>
       
       <class>com.soprasteria.de.b1.pb.techupdate.Login</class>
       
@@ -17,7 +17,7 @@
          <property name="hibernate.dialect" 
          	       value="org.hibernate.dialect.Oracle10gDialect"/>
          <property name="hibernate.hbm2ddl.auto" 
-                   value="create"/>
+                   value="update"/>
          <property name="hibernate.show_sql" 
                    value="true"/>
       </properties>
