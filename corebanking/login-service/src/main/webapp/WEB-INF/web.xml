@@ -6,6 +6,7 @@
   version="3.0"
   >
 
+  <display-name>Core Banking Login Service</display-name>
   <resource-ref>
     <description>Core Banking Connection</description>
     <res-ref-name>jdbc/corebankingDataSource</res-ref-name>
