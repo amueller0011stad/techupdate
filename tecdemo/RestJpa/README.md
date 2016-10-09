@@ -11,10 +11,8 @@
  - DB Setup -> siehe unten
  - bei den Gradle-Tasks JettyRun aufrufen
  - im Browser dann 
-    - http://localhost:8080/jparest/jparest/demo/some_text einfacher Rest-Aufruf
-    - http://localhost:8080/jparest/jparest/example_json REST mit JSON
-    - http://localhost:8080/jparest/jparest/example_jpa/TWO JPA Beispiel
-    - http://localhost:8080/jparest/jparest/example_jpa_di/three JPA DI Beispiel
+    - http://localhost:8080/RestJpa/restjpa/banks/list Liste aller Banken
+    Beispieloutput: [{"id":1,"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}]
 
 ### Gradle Tasks f&uuml;r den DB-Setup
  - derbyStart: Startet derby
