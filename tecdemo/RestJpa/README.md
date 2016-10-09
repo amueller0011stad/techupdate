@@ -11,7 +11,7 @@
  - DB Setup -> siehe unten
  - bei den Gradle-Tasks JettyRun aufrufen
  - im Browser dann 
-    - http://localhost:8080/RestJpa/restjpa/banks/list Liste aller Banken
+    - http://localhost:8080/RestJpa/corebanking/banks/list Liste aller Banken
     Beispieloutput: [{"id":1,"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}]
 
 ### Gradle Tasks f&uuml;r den DB-Setup

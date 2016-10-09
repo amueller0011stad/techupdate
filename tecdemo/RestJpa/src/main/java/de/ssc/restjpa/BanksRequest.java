@@ -1,4 +1,4 @@
-package de.ssc.restjpa.jpadi;
+package de.ssc.restjpa;
 
 import java.util.List;
 

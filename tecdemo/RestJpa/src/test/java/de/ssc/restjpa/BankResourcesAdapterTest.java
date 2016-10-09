@@ -1,12 +1,12 @@
-package de.ssc.restjpa.jpadi;
+package de.ssc.restjpa;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import de.ssc.restjpa.BankResourcesAdapter;
 import de.ssc.restjpa.entity.BankEntity;
-import de.ssc.restjpa.jpadi.BankResourcesAdapter;
 import de.ssc.restjpa.model.Bank;
 
 import static org.hamcrest.MatcherAssert.*;

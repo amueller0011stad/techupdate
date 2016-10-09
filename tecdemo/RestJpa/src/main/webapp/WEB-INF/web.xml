@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
        <servlet-name>JpaRestServlet</servlet-name>
-       <url-pattern>/restjpa/*</url-pattern>
+       <url-pattern>/corebanking/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
