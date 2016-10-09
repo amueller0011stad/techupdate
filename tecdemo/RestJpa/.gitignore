@@ -1,0 +1,10 @@
+/.gradle/
+/bin/**
+/logs/**
+/build/**
+/restJpaDb/**
+.classpath
+.project
+gradlew*
+.asscache
+derby.log
