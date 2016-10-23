@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 
 /**
  * This is the entry point for the logon service.
@@ -21,5 +22,11 @@ extends SpringBootServletInitializer
     {
         log.info("Initializing service");
         return builder;
+    }
+    
+    @Bean
+    public JwkDao newJwkDao()
+    {
+        return new JwkDao();
     }
 }

@@ -15,7 +15,7 @@ public class LoginUtil
 {
     private static final Logger log = Logger.getLogger("corebanking-login-service");
 
-    public static String createRandomString128()
+    private static String createRandomString128()
     {
         try(Formatter fmt = new Formatter())
         {
@@ -24,7 +24,7 @@ public class LoginUtil
         }
     }
     
-    public static String sha256h(String s)
+    private static String sha256h(String s)
     throws NoSuchAlgorithmException
     {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");

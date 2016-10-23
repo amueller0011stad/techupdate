@@ -20,6 +20,7 @@ public class Login
 {
 
     @Id
+    @Column(name="USERNAME")
     private String username;
 
     @Column(name = "SALT")
