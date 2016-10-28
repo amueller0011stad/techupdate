@@ -101,4 +101,12 @@ public class Login
     {
         return LoginUtil.checkPw(pw,getSalt(),getHash());
     }
+    
+    public void setNewPassword(String newPassword)
+    {
+        String[] pwAndSalt = LoginUtil.createNewPasswordHashAndSalt(
+                newPassword);
+        setHash(pwAndSalt[0]);
+        setSalt(pwAndSalt[1]);
+    }
 }

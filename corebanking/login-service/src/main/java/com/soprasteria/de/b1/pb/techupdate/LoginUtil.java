@@ -51,16 +51,22 @@ public class LoginUtil
     }
     
     public static String[] createNewPasswordHashAndSalt(String pw)
-    throws Exception
     {
-        String salt = createRandomString128();
-        String sha256h = sha256h(pw+salt);
-        return new String[]{sha256h,salt};
+        try
+        {
+            String salt = createRandomString128();
+            String sha256h = sha256h(pw+salt);
+            return new String[]{sha256h,salt};
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            /* Every JDK knows SHA-256! */
+            throw new InternalError(e);
+        }
     }
     
     /**Helper to create new passwords on the command line */
     public static void main(String[] args)
-    throws Exception
     {
         if(args.length==2 && "create".equals(args[0]))
         {

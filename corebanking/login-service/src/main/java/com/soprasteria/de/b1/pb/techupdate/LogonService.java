@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 
 /**
  * This is the entry point for the logon service.
@@ -20,13 +19,7 @@ extends SpringBootServletInitializer
     protected SpringApplicationBuilder configure(
             SpringApplicationBuilder builder)
     {
-        log.info("Initializing login service");
+        log.info("Initializing service");
         return builder;
-    }
-    
-    @Bean
-    public PersistenceSupport createPersistenceSupport()
-    {
-        return new PersistenceSupport();
     }
 }
