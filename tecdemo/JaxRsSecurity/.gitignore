@@ -5,6 +5,5 @@
 /restJpaDb/**
 .classpath
 .project
-gradlew*
 .asscache
 derby.log
