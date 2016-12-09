@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
@@ -13,10 +14,13 @@ import de.ssc.restjpa.entity.BankEntity;
 
 public class BankScImpl implements BankSc {
 
+	@PersistenceContext(name="REST_JPA", unitName="REST_JPA")
+	private EntityManager entityManager;
+
 	@Override
 	public BankEntity add(int bankNumber, String description, String serverAdress) {
 
-		EntityManager entityManager = Persistence.createEntityManagerFactory("REST_JPA").createEntityManager();
+//		EntityManager entityManager = Persistence.createEntityManagerFactory("REST_JPA").createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		try {
 			transaction.begin();

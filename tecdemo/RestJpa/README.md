@@ -13,6 +13,7 @@
  - im Browser dann 
     - http://localhost:8080/RestJpa/corebanking/banks/list Liste aller Banken
     Beispieloutput: [{"id":1,"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}]
+ - für ein create: curl -H "Content-Type: application/json" -X PUT -d '{"id":1,"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}' http://localhost:8080/RestJpa/corebanking/banks/create
 
 ### Gradle Tasks f&uuml;r den DB-Setup
  - derbyStart: Startet derby
