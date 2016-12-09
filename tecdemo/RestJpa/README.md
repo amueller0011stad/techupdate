@@ -26,6 +26,6 @@
  - Jetty Plugin ersetzen durch gretty
  . Gradle nimmt zu bauen die Java-Version mit der Eclipse gestartet wurde. Das finde ich suboptimal
  - Andere DB-Zufgriffsmögichkeiten demonstrieren (Named Querys, JPQL, ...)
- - ...
+ - ....
  
  
