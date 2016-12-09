@@ -24,13 +24,15 @@ public class BanksRequest {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
 	public Bank create(Bank input) {
-		Bank bank = new Bank();
-		bank.setBankNumber(22);
-		bank.setDescription("Hallo");
-		bank.setServerAdress("Demo");
-		bank.setId(input.getId());
-		// TODO DB-Anbindung
-		return bank;
+		BankEntity entity = mModel.add(input.getBankNumber(), input.getDescription(), input.getServerAdress());
+		return mAdapter.adapt(entity);
+//		Bank bank = new Bank();
+//		bank.setBankNumber(22);
+//		bank.setDescription("Hallo");
+//		bank.setServerAdress("Demo");
+//		bank.setId(input.getId());
+//		// TODO DB-Anbindung
+//		return bank;
 	}
 
 	@Path("list")

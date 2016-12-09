@@ -14,13 +14,13 @@ import de.ssc.restjpa.entity.BankEntity;
 
 public class BankScImpl implements BankSc {
 
-	@PersistenceContext(name="REST_JPA", unitName="REST_JPA")
-	private EntityManager entityManager;
+	@PersistenceContext(unitName="REST_JPA")
+	private EntityManager entityManager; // TODO wieso funktioniert das nicht?
 
 	@Override
 	public BankEntity add(int bankNumber, String description, String serverAdress) {
 
-//		EntityManager entityManager = Persistence.createEntityManagerFactory("REST_JPA").createEntityManager();
+		EntityManager entityManager = Persistence.createEntityManagerFactory("REST_JPA").createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		try {
 			transaction.begin();
@@ -31,6 +31,7 @@ public class BankScImpl implements BankSc {
 			entity.setServerAdress(serverAdress);
 			
 			entityManager.persist(entity);
+			transaction.commit();
 			return entity;
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error("Problem persisting", e);
