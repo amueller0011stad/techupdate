@@ -1,12 +1,13 @@
 buildscript {
+	ext.derbyVersion = '10.12.1.1'
+
 	repositories {
         mavenCentral()		
     	jcenter()
 	}
 
   	dependencies {
-//    	classpath 'org.akhikhl.gretty:gretty:+'
-	    classpath("org.apache.derby:derbyclient:10.12.1.1")
+	    classpath "org.apache.derby:derbyclient:${derbyVersion}"
   }
 }
 
@@ -15,13 +16,13 @@ configurations {
 }
 
 dependencies {
-    runtime 'org.apache.derby:derbyclient:10.12.1.1'
+    runtime "org.apache.derby:derbyclient:${derbyVersion}"
 
-    derbydb "org.apache.derby:derby:10.12.1.1"
-    derbydb "org.apache.derby:derbyclient:10.12.1.1"
-    derbydb "org.apache.derby:derbynet:10.12.1.1"
-    derbydb "org.apache.derby:derbytools:10.12.1.1"
-    derbydb "org.apache.derby:derbyoptionaltools:10.12.1.1"
+    derbydb "org.apache.derby:derby:${derbyVersion}"
+    derbydb "org.apache.derby:derbyclient:${derbyVersion}"
+    derbydb "org.apache.derby:derbynet:${derbyVersion}"
+    derbydb "org.apache.derby:derbytools:${derbyVersion}"
+    derbydb "org.apache.derby:derbyoptionaltools:${derbyVersion}"
 }
 
 def DERBY_GROUP = 'derby'

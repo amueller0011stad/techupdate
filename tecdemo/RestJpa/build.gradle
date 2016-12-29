@@ -12,7 +12,6 @@ plugins {
 
 apply plugin: 'war'
 apply plugin: 'eclipse'
-
 apply from: 'derby.gradle'
 
 sourceCompatibility = 1.8
