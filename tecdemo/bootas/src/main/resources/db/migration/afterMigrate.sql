@@ -1,0 +1,2 @@
+-- Fix fuer Lockingprobleme mit SQLDB's
+--SET DATABASE TRANSACTION CONTROL MVCC;

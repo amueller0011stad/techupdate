@@ -1,0 +1,192 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.3.RELEASE'
+    }
+
+    repositories {
+    	jcenter()
+        mavenCentral()		
+        mavenLocal()
+		maven { url "https://repo.grails.org/grails/core" }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+    	classpath("org.akhikhl.gretty:gretty:+")
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")		
+		classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE'
+		classpath("org.codehaus.groovy:groovy:2.4.6")
+		classpath("com.bertramlabs.plugins:asset-pipeline-gradle:2.7.4")
+		classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.0")			
+	    classpath("org.apache.derby:derbyclient:10.12.1.1")
+    }
+}
+
+plugins {
+//    id 'com.craigburke.client-dependencies' version '1.0.0-RC2'
+	id "com.craigburke.client-dependencies" version "1.3.1"
+//    id 'org.springframework.boot' version '1.4.3.RELEASE'
+    id "com.bertramlabs.plugins.asset-pipeline" version "2.4.2"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+//apply plugin: 'idea'
+//apply plugin: 'spring-boot'
+//apply plugin: 'asset-pipeline'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+jar {
+    baseName = 'boot-demo'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+	mavenLocal()
+	jcenter()
+	maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    providedRuntime
+    derbydb
+}
+
+// Weitere Optionen: http://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+gretty {
+	port = 8080
+	fileLogEnabled = false
+	managedClassReload = true
+}
+
+dependencies {    
+//    compile("org.springframework.boot:spring-boot-starter-web")         
+	compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-tomcat")
+	runtime("org.hibernate:hibernate-validator:4.3.2.Final")
+
+    compile("org.apache.derby:derbyclient:10.12.1.1")
+	compile("org.flywaydb:flyway-core:4.0")
+		
+    //compile("org.codehaus.groovy:groovy")
+	compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.6'
+	compile("com.bertramlabs.plugins:asset-pipeline-spring-boot:2.12.1")
+	compile("javax.inject:javax.inject:1")
+	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate4', version: '2.7.4'
+	
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    
+    derbydb "org.apache.derby:derby:10.12.1.1"
+    derbydb "org.apache.derby:derbyclient:10.12.1.1"
+    derbydb "org.apache.derby:derbynet:10.12.1.1"
+    derbydb "org.apache.derby:derbytools:10.12.1.1"
+    derbydb "org.apache.derby:derbyoptionaltools:10.12.1.1"
+}
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '3.2.1'
+}
+
+clientDependencies {
+
+	bower {
+        'jquery'('2.2.x', from:'dist') { 
+            include 'jquery.js'
+			include 'jquery.min.js'
+        }
+		'materialize'('0.97.x', from:'dist', into:'materialize'){
+			include "**"
+		}		
+		
+    }
+	
+	npm {
+		'angular'('1.5.x', into: 'angular') {
+			include 'angular.js' 
+			include 'angular.min.js'
+		}
+		'angular-resource'('1.5.x', into: 'angular') {
+			include 'angular-resource.js'
+			include 'angular-resource.min.js'
+		}
+		'angular-mocks'('1.5.x', into: 'angular') {
+			include 'angular-mocks.js'
+			include 'angular-mocks.min.js'
+		}		
+		'angular-ui-router'('0.2.18', into: 'angular'){
+			include 'angular-ui-router.js'
+			include 'angular-ui-router.min.js'
+		}
+		'angular-animate'('1.5.x', into: 'angular') {
+			include 'angular-animate.js'
+			include 'angular-animate.min.js'
+		}
+		'angular-cookies'('1.5.x', into: 'angular') {
+			include 'angular-cookies.js'
+			include 'angular-cookies.min.js'
+		}
+        
+	}
+
+	
+}
+
+assets {
+  minifyJs = true
+  minifyCss = true    
+}
+
+flyway {
+    driver = 'org.apache.derby.jdbc.ClientDriver'
+    url = 'jdbc:derby://localhost:1527/bootasDb;create=true;user=bootas;password=bootas'
+    user = 'bootas'
+    password = 'bootas' 
+//    schemas = ['APP']
+}
+
+
+def DERBY_GROUP = 'derby'
+
+// derbyuser / derbyuser
+// TODO nur starten wenn nicht schon gestartet ist
+task derbyStart(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.drda.NetworkServerControl'
+    args = [
+            "start", "-noSecurityManager"
+           ]
+}
+
+task derbyCreateDb(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.tools.ij'
+  standardInput = new ByteArrayInputStream((
+  	"connect 'jdbc:derby://localhost:1527/bootasDb;create=true;user=bootas;password=bootas';\n" +
+  	"CREATE SCHEMA BOOTAS;"
+  	).getBytes());
+}
+
+task derbyStop(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.drda.NetworkServerControl'
+    args = [
+            "shutdown",
+           ]
+}
+
+derbyStart.group = DERBY_GROUP
+derbyCreateDb.group = DERBY_GROUP
+derbyStop.group = DERBY_GROUP
+

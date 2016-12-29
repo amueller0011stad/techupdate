@@ -1,0 +1,9 @@
+/bin/**
+/build/**
+/bootasDb/**
+.classpath
+.project
+.asscache
+/src/assets/vendor/**
+derby.log
+/.gradle/
