@@ -1,0 +1,56 @@
+buildscript {
+	repositories {
+        mavenCentral()		
+    	jcenter()
+	}
+
+  	dependencies {
+//    	classpath 'org.akhikhl.gretty:gretty:+'
+	    classpath("org.apache.derby:derbyclient:10.12.1.1")
+  }
+}
+
+configurations {
+    derbydb
+}
+
+dependencies {
+    runtime 'org.apache.derby:derbyclient:10.12.1.1'
+
+    derbydb "org.apache.derby:derby:10.12.1.1"
+    derbydb "org.apache.derby:derbyclient:10.12.1.1"
+    derbydb "org.apache.derby:derbynet:10.12.1.1"
+    derbydb "org.apache.derby:derbytools:10.12.1.1"
+    derbydb "org.apache.derby:derbyoptionaltools:10.12.1.1"
+}
+
+def DERBY_GROUP = 'derby'
+
+task derbyStart(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.drda.NetworkServerControl'
+    args = [
+            "start", "-noSecurityManager"
+           ]
+}
+
+task derbyCreateDb(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.tools.ij'
+  standardInput = new ByteArrayInputStream((
+  	"connect 'jdbc:derby://localhost:1527/restJpaDb;create=true;user=restjpa;password=restjpa';\n" +
+  	"CREATE SCHEMA RESTJPA;"
+  	).getBytes());
+}
+
+task derbyStop(type: JavaExec) {
+  classpath = configurations.derbydb
+  main = 'org.apache.derby.drda.NetworkServerControl'
+    args = [
+            "shutdown",
+           ]
+}
+
+derbyStart.group = DERBY_GROUP
+derbyCreateDb.group = DERBY_GROUP
+derbyStop.group = DERBY_GROUP

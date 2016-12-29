@@ -3,20 +3,17 @@ buildscript {
         mavenCentral()		
     	jcenter()
 	}
-
-  	dependencies {
-    	classpath 'org.akhikhl.gretty:gretty:+'
-	    classpath("org.apache.derby:derbyclient:10.12.1.1")
-  }
 }
 
 plugins {
     id "org.flywaydb.flyway" version "4.0.3"
+	id "org.akhikhl.gretty" version "1.4.0"
 }
 
 apply plugin: 'war'
 apply plugin: 'eclipse'
-apply plugin: 'org.akhikhl.gretty'
+
+apply from: 'derby.gradle'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -31,17 +28,6 @@ repositories {
     maven {
         url 'http://download.eclipse.org/rt/eclipselink/maven.repo'
     }
-}
-
-configurations {
-    derbydb
-}
-
-// Weitere Optionen: http://akhikhl.github.io/gretty-doc/Gretty-configuration.html
-gretty {
-	port = 8080
-	fileLogEnabled = false
-	managedClassReload = true
 }
 
 task wrapper(type: Wrapper) {
@@ -62,14 +48,6 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-integration:1.3'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 	testCompile 'junit:junit:4.12'
-    
-    runtime("org.apache.derby:derbyclient:10.12.1.1")
-
-    derbydb "org.apache.derby:derby:10.12.1.1"
-    derbydb "org.apache.derby:derbyclient:10.12.1.1"
-    derbydb "org.apache.derby:derbynet:10.12.1.1"
-    derbydb "org.apache.derby:derbytools:10.12.1.1"
-    derbydb "org.apache.derby:derbyoptionaltools:10.12.1.1"
 }
 
 flyway {
@@ -79,33 +57,9 @@ flyway {
     password = 'restjpa' 
 }
 
-def DERBY_GROUP = 'derby'
-
-task derbyStart(type: JavaExec) {
-  classpath = configurations.derbydb
-  main = 'org.apache.derby.drda.NetworkServerControl'
-    args = [
-            "start", "-noSecurityManager"
-           ]
+// Weitere Optionen: http://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+gretty {
+	port = 8080
+	fileLogEnabled = false
+	managedClassReload = true
 }
-
-task derbyCreateDb(type: JavaExec) {
-  classpath = configurations.derbydb
-  main = 'org.apache.derby.tools.ij'
-  standardInput = new ByteArrayInputStream((
-  	"connect 'jdbc:derby://localhost:1527/restJpaDb;create=true;user=restjpa;password=restjpa';\n" +
-  	"CREATE SCHEMA RESTJPA;"
-  	).getBytes());
-}
-
-task derbyStop(type: JavaExec) {
-  classpath = configurations.derbydb
-  main = 'org.apache.derby.drda.NetworkServerControl'
-    args = [
-            "shutdown",
-           ]
-}
-
-derbyStart.group = DERBY_GROUP
-derbyCreateDb.group = DERBY_GROUP
-derbyStop.group = DERBY_GROUP
