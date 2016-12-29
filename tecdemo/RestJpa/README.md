@@ -9,7 +9,7 @@
  - Download/clone.
  - Im Eclipse: Import as Gradle Project
  - DB Setup -> siehe unten
- - bei den Gradle-Tasks gretty -> allRun aufrufen
+ - bei den Gradle-Tasks gretty -> appRun aufrufen
  - im Browser dann 
     - http://localhost:8080/RestJpa/corebanking/banks/list Liste aller Banken
     Beispieloutput: [{"id":1,"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}]
