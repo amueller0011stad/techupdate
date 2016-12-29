@@ -5,7 +5,7 @@ buildscript {
 	}
 
   	dependencies {
-//    	classpath 'org.akhikhl.gretty:gretty:1.4.0'
+    	classpath 'org.akhikhl.gretty:gretty:+'
 	    classpath("org.apache.derby:derbyclient:10.12.1.1")
   }
 }
@@ -16,7 +16,7 @@ plugins {
 
 apply plugin: 'war'
 apply plugin: 'eclipse'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -37,10 +37,13 @@ configurations {
     derbydb
 }
 
-// Alternatives Jetty-Plugin.
-//if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
-//  project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
-  
+// Weitere Optionen: http://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+gretty {
+	port = 8080
+	fileLogEnabled = false
+	managedClassReload = true
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '3.1'
 }
