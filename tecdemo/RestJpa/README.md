@@ -17,7 +17,6 @@
     - http://ec2-52-59-213-218.eu-central-1.compute.amazonaws.com:8090/RestJpa/corebanking/banks/list
  - für ein create: curl -H "Content-Type: application/json" -X PUT -d '{"bankNumber":3321,"description":"Demo","serverAdress":"localhost"}' http://localhost:8080/RestJpa/corebanking/banks/create
  - Zum Debuggen appRunDebug wählen und einen Remotedebugger auf Port 5005 starten
-http://ec2-52-59-213-218.eu-central-1.compute.amazonaws.com:8090//RestJpa/corebanking/banks/list
 
 ### Gradle Tasks f&uuml;r den DB-Setup
  - derbyStart: Startet derby
