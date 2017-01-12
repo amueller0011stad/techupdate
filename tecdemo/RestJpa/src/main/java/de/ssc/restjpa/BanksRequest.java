@@ -7,10 +7,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.slf4j.LoggerFactory;
 
 import de.ssc.restjpa.entity.BankEntity;
 import de.ssc.restjpa.model.Bank;
@@ -25,21 +24,25 @@ public class BanksRequest {
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
-	public Bank create(Bank input) {
-		BankEntity entity = mModel.add(input.getBankNumber(), input.getDescription(), input.getServerAdress());
+	public Bank create(Bank bank) 
+	{
+		BankEntity entity = mModel.add(bank.getBankNumber(), bank.getDescription(), bank.getServerAdress());
 		return mAdapter.adapt(entity);
+//		Bank bank = new Bank();
+//		bank.setBankNumber(22);
+//		bank.setDescription("Hallo");
+//		bank.setServerAdress("Demo");
+//		bank.setId(input.getId());
+//		// TODO DB-Anbindung
+//		return bank;
 	}
 
 	@Path("list")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bank> list() {
-		LoggerFactory.getLogger(this.getClass()).info("start - list()");
-
 		List<BankEntity> list = mModel.list();
 		List<Bank> resList = mAdapter.adapt(list);
-		
-		LoggerFactory.getLogger(this.getClass()).info("end - list()");
 		return resList;
 	}
 	
