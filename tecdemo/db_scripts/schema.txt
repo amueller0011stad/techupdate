@@ -1,0 +1,58 @@
+	- Datenmodell
+		○ #Objekt
+			§ <#Attribut>
+			§ ...
+		○ Employee
+			§ <ID>
+			§ <employee nummber>
+			§ <login>
+			§ <last name>
+			§ <fist name>
+			§ ...
+		○ Customer
+			§ <ID>
+			§ <customer number>
+			§ <login>
+			§ <customer type>
+			§ <last name>
+			§ <first name>
+			§ <date of birth>
+			§ …
+			§ <association ID>
+		○ Customer type
+			§ <ID>
+			§ <description>
+		○ Login
+			§ <ID>
+			§ <username>
+			§ <password hash>
+			§ <salt>
+			§ <failed login attemmpts>
+			§ <valid until>
+			§ <locked>
+		○ Account
+			§ <ID>
+			§ <account numer>
+			§ <account type>
+			§ <customer>
+			§ <description>
+		○ Account type
+			§ <ID>
+			§ <Bezeichnung>
+			§ <Zinssatz>
+			§ <annual fee>
+		○ Transaction
+			§ <ID>
+			§ <transaction type>
+			§ <from bank>
+			§ <from account>
+			§ <to bank>
+			§ <to account>
+			§ <amount>
+			§ <timestamp>
+			§ <description>
+		○ Bank
+			§ <ID>
+			§ <description>
+			§ <bank number>
+			§ <server address>
