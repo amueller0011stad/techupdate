@@ -1,15 +1,19 @@
 package de.ssc.restjpa;
 
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation.Builder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.WebResource.Builder;
 
 import de.ssc.restjpa.model.Bank;
 
@@ -19,26 +23,57 @@ import de.ssc.restjpa.model.Bank;
  * @author ufreise
  *
  */
-public class BanksRequestTest 
+public class BanksRequestTest
 {
-	@Test
+	// AJM Das ist kein Test der von Gradle beim bauen oder vom Jenkins ausgefuehrt werden sollte. Deshalb erst mal auf ignore.
+	@Ignore @Test
 	public void testServiceCall()
 	{
-		// 1. Datensatz einfügen
-		// Web Resource erzeugen
-		WebResource webRes = Client.create().resource("http://localhost:8080/RestJpa");
-		// JSon Objekt mit den einzufügenden Bankdaten erzeugen
+		listBanks();
+		createBank();
+		listBanks();
+	}
+	
+	private void listBanks()
+	{
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(JacksonFeature.class);
+		
+		Client client = ClientBuilder.newClient(clientConfig);
+
+		WebTarget webTarget = client.target("http://localhost:8080/corebanking/corebanking/banks/list");
+
+		Builder request = webTarget.request();
+		request.header("Content-type", MediaType.APPLICATION_JSON);
+
+		List<Bank> banks = request.buildGet().invoke(new GenericType<List<Bank>>() {});
+		
+		System.out.println("Found " + banks.size() + " banks");
+		for (Bank bank : banks) {
+			System.out.println("  " + bank.getId() + ", " + bank.getBankNumber() + ", " + bank.getDescription() + ", " + bank.getServerAdress());
+		}
+	}
+	
+	private void createBank()
+	{
 		Bank bank = new Bank();
 		bank.setBankNumber(4713);
 		bank.setDescription("Deutsche Kartoffelbank");
-		bank.setServerAdress("http://localhost:8081/RestJpa");
-		// Service Aufruf und Datensatz in DB schreiben
-		ClientResponse response = 
-				webRes.path("corebanking").path("banks").path("create").type(MediaType.APPLICATION_JSON).put(ClientResponse.class, bank);
-		assertNotNull(response.getEntity(Bank.class));
-		// 2. Daten auslesen
-		webRes = Client.create().resource("http://localhost:8080/RestJpa");
-		Builder sb1 = webRes.path("corebanking").path("banks").path("list").accept(MediaType.APPLICATION_JSON);
-		System.out.println(sb1.get(String.class));
+		bank.setServerAdress("http://dkb.com/");
+		
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(JacksonFeature.class);
+		
+		Client client = ClientBuilder.newClient(clientConfig);
+
+		Builder request = client.target("http://localhost:8080/corebanking/corebanking/banks/create").request();
+		request.header("Content-type", MediaType.APPLICATION_JSON);
+		Bank createdBank = request.buildPut(Entity.json(bank)).invoke(new GenericType<Bank>() {});
+
+		System.out.println("Bank with id " + createdBank.getId() + " created");
+	}
+	
+	public static void main(String[] args) {
+		new BanksRequestTest().testServiceCall();
 	}
 }
